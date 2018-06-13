@@ -14,14 +14,28 @@ app.get('/', function(req, res){
 });
 
 app.get('/skills', function(req, res){
-	var skills= fs.readFileSync('./data.json');
-	skills = JSON.parse(skills);
-	//TODO: Render this array of skills into an EJS template
-	res.send(skills);
+	var skills = fs.readFileSync('./data.json');
+	skillsToObjects = JSON.parse(skills);
+	res.render('skills', {skills: skillsToObjects})
 });
 
 // TODO: Add GET route that returns static page containing form 
+app.get('/skills/new', function(req, res){
+	res.sendFile(__dirname + '/static/html/form.html');
+});
 
+app.post('/skills', function(req, res){
+
+	var skills = fs.readFileSync('./data.json');
+	var skills = JSON.parse(skills);
+
+	skills.push({name: req.body.name, level: req.body.type});
+
+	fs.writeFileSync('./data.json', JSON.stringify(skills));
+
+	res.redirect('/skills');
+
+});
 // TODO: Add POST route that writes new skill to the file, redirects to skills index
 // TODO: Form should have action='/skills' and method='POST'
 

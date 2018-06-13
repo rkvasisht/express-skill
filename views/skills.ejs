@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<h3>Here are a lists of my skills:</h3>
+		<ul>
+		<% skills.forEach(function(skill){ %>
+			<li><%= skill.name %> is my skill and my level is a <%= skill.level %></li>
+
+
+		<% }) %>
+		</ul>
+	</body>
+</html>
